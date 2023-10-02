@@ -151,43 +151,7 @@
     <script src="assets/js/misc.js"></script>
     <script>
         $(function() {
-            $.getJSON("data.php?acceuil", function(billets) {
-                $("#billets").empty();
-                billets.forEach((billet) => {
-                    const card = $(`
-                <div class="col-md-5 grid-margin card mr-5 ml-3">
-                    <div class="card">
-                      <div>
-                        <h4 class="card-title text-primary mt-4 ml-2">
-                          ${billet.titre}
-                          <small class="text-muted">
-                            (${billet.date_creation_fr})
-                          </small>
-                        </h4>
-                        <h5 class="ml-2 text-dark"> 
-                          Contenu : ${billet.contenu}
-                        </h5>
-                        <h4 class="card-title text-danger mt-4 ml-2">
-                          Derniers commentaires
-                        </h4>
-                      </div>
-                    </div>
-                </div>
-            `);
-                    let ul = $(`<ul class="list-ticked card"></ul>`);
-                    for (let i = 0; i < billet.commentaires.length; i++) {
-                        ul.append($(`<li class="ml-2">${billet.commentaires[i]}</li>`));
-                    }
-                    let btn_class = "mt-3 offset-9 col-3" + " " + "btn" + " " + getColor();
-                    ul.append(
-                        $(
-                            `<button type="button" title="Ajouter un commentaire" id="${billet.id}" name="${billet.titre}" class="${btn_class}"><i class="mdi mdi-plus"></i></button>`
-                        )
-                    );
-                    card.append(ul);
-                    $("#billets").append(card);
-                });
-            });
+            load();
 
             $("#billets").on("click", "button", function() {
                 let id = $(this).attr("id");
@@ -230,11 +194,54 @@
                             ajout_commentaire,
                         },
                         function(response) {
-                            location.reload();
+                            if (response) {
+                                $(".modal").hide();
+                                load();
+                            }
                         }
                     );
                 }
             });
+
+            function load() {
+                $.getJSON("data.php?acceuil", function(billets) {
+                    $("#billets").empty();
+                    billets.forEach((billet) => {
+                        const card = $(`
+                            <div class="col-md-5 grid-margin card mr-5 ml-3">
+                                <div class="card">
+                                <div>
+                                    <h4 class="card-title text-primary mt-4 ml-2">
+                                    ${billet.titre}
+                                    <small class="text-muted">
+                                        (${billet.date_creation_fr})
+                                    </small>
+                                    </h4>
+                                    <h5 class="ml-2 text-dark"> 
+                                        Contenu : ${billet.contenu}
+                                    </h5>
+                                    <h4 class="card-title text-danger mt-4 ml-2">
+                                        Derniers commentaires
+                                    </h4>
+                                </div>
+                                </div>
+                            </div>
+                        `);
+                        let ul = $(`<ul class="list-ticked card"></ul>`);
+                        for (let i = 0; i < billet.commentaires.length; i++) {
+                            ul.append($(`<li class="ml-2">${billet.commentaires[i]}</li>`));
+                        }
+                        let btn_class = "mt-3 offset-9 col-3" + " " + "btn" + " " + getColor();
+                        ul.append(
+                            $(
+                                `<button type="button" title="Ajouter un commentaire" id="${billet.id}" name="${billet.titre}" class="${btn_class}"><i class="mdi mdi-plus"></i></button>`
+                            )
+                        );
+                        card.append(ul);
+                        $("#billets").append(card);
+                    });
+                });
+            }
 
             function getColor() {
                 let index = "";

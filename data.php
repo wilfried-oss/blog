@@ -2,7 +2,7 @@
 require('db.php');
 if (isset($_GET['acceuil'])) {
     $query1 = $db->query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM billets ORDER BY date_creation DESC LIMIT 4;');
-    $query2 = $db->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_ajout, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE billet_id=? ORDER BY date_commentaire_fr DESC LIMIT 3;');
+    $query2 = $db->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_ajout, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaires WHERE billet_id=? ORDER BY date_commentaire_fr DESC LIMIT 4;');
     while ($data = $query1->fetch()) {
         $billet = [];
         $billet['id'] = $data['id'];
