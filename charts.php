@@ -1,3 +1,13 @@
+<?php
+session_start();
+require('db.php');
+if (!$_SESSION['user'])
+    header("Location:login.php");
+$user = $_SESSION['user'];
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,11 +42,11 @@
                     <li class="nav-item nav-profile">
                         <a class="nav-link" id="profileDropdown" href="#" aria-expanded="false">
                             <div class="nav-profile-img">
-                                <img src="assets/images/faces/face1.jpg" alt="image" />
+                                <img src="<?php echo $user['profile']; ?>" alt="image">
                                 <span class="availability-status online"></span>
                             </div>
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">David Greymaax</p>
+                                <p class="mb-1 text-black"><?php echo $user['name'] ?></p>
                             </div>
                         </a>
                     </li>
@@ -64,11 +74,11 @@
                     <li class="nav-item nav-profile">
                         <a href="#" class="nav-link">
                             <div class="nav-profile-image">
-                                <img src="assets/images/faces/face1.jpg" alt="profile" />
+                                <img src="<?php echo $user['profile']; ?>" alt="image">
                                 <span class="login-status online"></span>
                             </div>
                             <div class="nav-profile-text d-flex flex-column">
-                                <span class="font-weight-bold mb-2">David Grey. H</span>
+                                <span class="font-weight-bold mb-2"><?php echo $user['name'] ?></span>
                             </div>
                             <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                         </a>
