@@ -55,8 +55,6 @@
                                     <a href="register.php" class="text-primary">Créer</a>
                                 </div>
                             </form>
-                            <!-- Ajout d'un élément pour afficher les messages -->
-
                         </div>
                     </div>
                 </div>
@@ -78,15 +76,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(function() {
-            $('#form1').on('click', function() {
-                var passwordInput = $('#password');
-                if (passwordInput.attr('type') === 'password') {
-                    passwordInput.attr('type', 'text');
-                } else {
-                    passwordInput.attr('type', 'password');
-                }
-            });
-
             $('#form').on('submit', function(e) {
                 e.preventDefault(); // Empêche le rechargement de la page après soumission
 

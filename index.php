@@ -225,7 +225,6 @@ $user = $_SESSION['user'];
             });
 
             function load() {
-                console.log("Coucou")
                 $.getJSON("data.php?acceuil", function(billets) {
                     $("#billets").empty();
                     billets.forEach((billet) => {

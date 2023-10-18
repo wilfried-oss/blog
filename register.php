@@ -134,17 +134,6 @@
                 }
                 var userData = new FormData($('#form')[0]);
 
-                // Créer un objet contenant les données de l'utilisateur
-
-                /*
-                var userData = {
-                    email: email,
-                    name: name,
-                    password: password,
-                    profile: profile
-                };*/
-
-                // Effectuer la requête Ajax pour inscrire l'utilisateur
                 $.ajax({
                     url: 'data.php', // Remplacez par votre URL de traitement du formulaire d'inscription
                     type: 'POST',
@@ -153,14 +142,11 @@
                     processData: false,
                     success: function(response) {
                         $('#form')[0].reset();
-
-
                         if (response == 1) {
                             $('#message').html('<div class="alert alert-success text-center">Inscription réussie !</div>');
                         } else {
                             $('#message').html('<div class="alert alert-danger text-center"> Erreur lors de l\'inscription</div>');
                         }
-
                     },
                 });
             });

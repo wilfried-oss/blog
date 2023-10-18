@@ -76,11 +76,11 @@ INSERT INTO `commentaires` (`id`, `billet_id`, `auteur`, `commentaire`, `date_aj
 --
 
 CREATE TABLE `user` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `id` serial AUTO_INCREMENT  NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `role` varchar(11) NOT NULL DEFAULT '0',
-  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
   `profile` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -88,8 +88,8 @@ CREATE TABLE `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `password`, `name`, `role`, `email`, `profile`) VALUES
-(1, '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Aaron', '0', 'password@gmail.com', 'upload/IMG_20230316_103152_055.jpg');
+INSERT INTO `user` (`password`, `name`, `role`, `email`, `profile`) VALUES
+('5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Aaron', '0', 'password@gmail.com', 'upload/IMG_20230316_103152_055.jpg');
 
 --
 -- Index pour les tables déchargées
